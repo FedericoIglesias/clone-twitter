@@ -1,7 +1,16 @@
-import Image from 'next/image'
+import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
+import { cookies } from "next/headers";
+import  AuthButton  from "@/app/components/auth-button";
 
-export default function Home() {
+export default async function Home() {
+  const supabase = createServerComponentClient({ cookies });
+  const { data: posts } = await supabase.from("posts").select();
+
   return (
-    <h1>Holis twitter :D</h1>
-    )
+    <main>
+      <AuthButton></AuthButton>
+      <h1>Holis twitter</h1>
+      <pre>{JSON.stringify(posts, null, 2)}</pre>
+    </main>
+  );
 }
