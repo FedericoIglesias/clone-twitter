@@ -1,5 +1,6 @@
 "use client";
 
+import {Button} from '@nextui-org/button';
 import {  type Session,  createClientComponentClient,} from "@supabase/auth-helpers-nextjs";
 import { useRouter } from "next/navigation";
 
@@ -27,9 +28,9 @@ export default function AuthButton({session} : {session: Session | null}) {
   return (
     <header>
       {session == null ? (
-        <button onClick={handleSignIn}>Sign In</button>
+        <Button onClick={handleSignIn}>Sign In</Button>
       ) : (
-        <button onClick={handleSingOut}>Sign Out</button>
+        <Button onClick={handleSingOut}>Sign Out</Button>
       )}
     </header>
   );

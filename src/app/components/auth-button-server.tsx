@@ -10,7 +10,7 @@ export async function AuthButtonServer() {
   } = await supabase.auth.getSession();
 
   return (
-    <section className="grid place-content-center min-h-screen">
+    <section className="grid place-content-center">
         <h1 className="text-xl font-bold mb-4">Inicia sesion en DevTer</h1>
       <AuthButton session={session}></AuthButton>
     </section>
