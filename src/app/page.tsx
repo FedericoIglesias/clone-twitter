@@ -2,10 +2,11 @@ import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 import { cookies } from "next/headers";
 import { AuthButtonServer } from "./components/auth-button-server";
 import { redirect } from "next/navigation";
-import PostCard from "./components/post-card";
+import { PostLists } from "./components/posts-list";
+import { Database } from "./types/database";
 
 export default async function Home() {
-  const supabase = createServerComponentClient({ cookies });
+  const supabase = createServerComponentClient<Database>({ cookies });
   const {
     data: { session },
   } = await supabase.auth.getSession();
@@ -16,27 +17,12 @@ export default async function Home() {
     redirect("/login");
   }
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
+    <main className="flex min-h-screen flex-col items-center justify-between">
+      <section className="max-w-[800px] mx-auto border-l border-r border-white/30 min-h-screen">
       <AuthButtonServer />
-      {posts?.map((post) => {
-        const { id, content, users } = post;
+      <PostLists posts={posts}/>
+      </section>
 
-        const {
-          user_name: userName,
-          name: userFullName,
-          avatar_url: avatarUrl,
-        } = users;
-
-        return (
-          <PostCard
-            content={content}
-            key={id}
-            userFullName={userFullName}
-            userName={userName}
-            avatarUrl={avatarUrl}
-          />
-        );
-      })}
     </main>
   );
 }
