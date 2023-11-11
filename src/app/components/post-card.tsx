@@ -39,7 +39,7 @@ export default function PostCard({
         </div>
       </CardHeader>
       <CardBody className="px-3 py-0 text-xs text-white">{content}</CardBody>
-      <CardFooter>
+      <CardFooter className="gap-3">
         <button>
           <IconMessageCircle2 className="w-4 h-4" />
         </button>
